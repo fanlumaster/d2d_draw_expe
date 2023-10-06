@@ -104,8 +104,8 @@ void DrawString(std::string str, float fontSize, float x, float y, float r,
 
   target->BeginDraw();
   // 这可以把窗口的背景颜色给清除成透明色，主要在于最后一个指定 a 的参数
-  target->Clear(D2D1::ColorF(0, 0, 0, 0));
-  // target->Clear(D2D1::ColorF(r, g, b, a));
+  // target->Clear(D2D1::ColorF(0, 0, 0, 0));
+  target->Clear(D2D1::ColorF(r, g, b, a));
   RECT re;
   GetClientRect(cand_ui_hwnd, &re);
   FLOAT dpix, dpiy;
