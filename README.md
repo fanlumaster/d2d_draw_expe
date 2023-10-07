@@ -1,4 +1,17 @@
 Some experiments on direct2d.
 
-![](https://i.imgur.com/LxhwFsL.png)
+## Transparent background
+
+Root dir,
+
+![](https://i.imgur.com/dBJoAqA.png)
+
+## Black background
+
+![](https://i.imgur.com/J5OAoKw.png)
+
+## sogou scheme skin
+
+![](https://i.imgur.com/qaxNu5T.png)
+
 

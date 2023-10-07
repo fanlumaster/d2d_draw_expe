@@ -104,12 +104,8 @@ void DrawString(std::wstring str, float fontSize, float x, float y, float r,
                 float g, float b, float a) {
 
   target->BeginDraw();
-  // 这可以把窗口的背景颜色给清除成透明色，主要在于最后一个指定 a 的参数
+  // 把窗口的背景颜色给清除成透明色，主要在于最后一个指定 a 的参数
   target->Clear(D2D1::ColorF(0, 0, 0, 0));
-  // 清除成白色的背景
-  // target-> Clear(D2D1::ColorF(1.0f, 1.0f, 1.0f, 1.0f));
-  // 清除成黑色的背景
-  // target-> Clear(D2D1::ColorF(0.0f, 0.0f, 0.0f, 1.0f));
   // target->Clear(D2D1::ColorF(r, g, b, a));
   RECT re;
   GetClientRect(cand_ui_hwnd, &re);
@@ -125,7 +121,15 @@ void DrawString(std::wstring str, float fontSize, float x, float y, float r,
     range.startPosition = 0;
     range.length = str.length();
     w_layout->SetFontSize(fontSize, range);
-    solid_brush->SetColor(D2D1::ColorF(r, g, b, a));
+
+    solid_brush->SetColor(
+        D2D1::ColorF(32.0f / 255.0f, 32.0f / 255.0f, 32.0f / 255.0f, 1.0f));
+    D2D1_RECT_F rect = D2D1::RectF(0.0f, 0.0f, 118.0f, 222.0f);
+    D2D1_ROUNDED_RECT rounded_rect = D2D1::RoundedRect(rect, 8, 8);
+    target->FillRoundedRectangle(rounded_rect, solid_brush);
+
+    solid_brush->SetColor(
+        D2D1::ColorF(229.0f / 255.0f, 229.0f / 255.0f, 229.0f / 255.0f, 1.0f));
     target->DrawTextLayout(D2D1::Point2F(x, y), w_layout, solid_brush);
     w_layout->Release();
     w_layout = NULL;
@@ -139,7 +143,9 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT uiMessage, WPARAM wParam,
   case WM_CREATE:
     break;
   case WM_PAINT:
-    DrawString(L"ll'zi\n1. 量子 ov\n2. 两字 ab\n3. 梁子 mv\n4. 良子 dv\n5. 凉子 dv\n6. 亮子 wv\n7. 梁紫 ms\n8. 两 ad", 18, 0, 0, 0, 1, 1, 1);
+    DrawString(L"ll'zi\n1. 量子 ov\n2. 两字 ab\n3. 梁子 mv\n4. 良子 dv\n5. "
+               L"凉子 dv\n6. 亮子 wv\n7. 梁紫 ms\n8. 两 ad",
+               18, 10, 3, 0, 1, 1, 1);
     break;
   case WM_CLOSE:
     DestroyWindow(hWnd);
